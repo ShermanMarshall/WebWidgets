@@ -40,6 +40,7 @@ define(function(require) {
 						panelTemplate += "<div class='panel-body'><a href='" + model.get('link') +"'>" + model.get('name') + "</a></div>";
 					});
 					panelTemplate += "</div>";
+					console.log(item);
 				}
 			});
 			panelTemplate += "</div>";
