@@ -45,6 +45,7 @@ define(function(require) {
 			});
 			panelTemplate += "</div>";
 			this.template = _.template(panelTemplate);
+			console.log(panelTemplate);
 		}
 	});
 	return {
