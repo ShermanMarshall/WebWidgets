@@ -4,29 +4,9 @@ define(function(require) {
 	var json = require('ips');
 	var table = require('table');
 
-	console.log(json);
-
 	var t = new table.table(json.prefixes);
-	console.log(t);
 
 	var ele = document.querySelector('#table-content');
-	ele.innerHTML = t.writeTable();
+	ele.innerHTML = "<div id='' class='container-fluid'>" + t.writeTable() + "</div>";
 
-	console.log(ele.innerHTML);
-
-/*
-	$.ajax({ 
-		type: 'GET', 
-		url: './ip-ranges.json', 
-		success: function(data) { 
-			console.log(data); 
-		}, 
-		error: function() { 
-			alert('err'); 
-		}
-	}).then(function(data) { 
-		console.log('deferred');
-		console.log(data);
-	});
-*/
 });

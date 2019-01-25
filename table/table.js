@@ -1,5 +1,4 @@
 define(function(require) {
-
 	class Table {
 		constructor(obj) {
 			this.headers = {};
@@ -7,8 +6,9 @@ define(function(require) {
 			this.columns = [];
 			this.tableData = undefined;
 			this.tableModel = {};
-			this.headerStyles = '';
-			this.rowStyles = '';
+			this.headerStyles = 'col-sm-';
+			this.columnStyles = 'col-sm-';
+			this.rowStyles = 'row';
 
 			if (typeof(obj) === typeof([])) {
 				this.tableData = obj; 
@@ -19,7 +19,6 @@ define(function(require) {
 			if (!this.tableData) {
 				return
 			}
-			this.tableString = '<table>';
 
 			var self = this;
 			this.tableData.map(function(item) {
@@ -28,33 +27,43 @@ define(function(require) {
 				}
 				self.rows.push(item);
 			});
+
+			var proportion = parseInt(12 / Object.keys(self.headers).length);
+			if (proportion > 1) {
+				this.headerStyles += proportion;
+				this.columnStyles += proportion;
+			//modify column handling for larger responsive tables
+			} else {
+	
+			}
 		}
 		writeTable() {
 			var headers = this.writeHeaders();
 			var body = this.writeBody();
-			return `<table>${headers}${body}</table>`;
+			return `${headers}${body}`;
 		}
 		writeHeaders() {
 			var self = this;
-			var output = '<tr>';
+			var output = `<div class='${self.rowStyles}'>`;
 			Object.keys(self.headers).map(function(hdr) {
-				output += `<th class='${self.headerStyles}'>${hdr}</th>`;
+				output += `<div class='${self.headerStyles}'>${hdr}</div>`;
 			});
-			output += '</tr>';
-			console.log(output);
+			output += '</div>';
 			return output;
 		}
 		writeBody() {
 			var self = this;
                         var output = '';
+			var count = 0;
                         self.rows.map(function(item) {
-				output += `<tr class='${self.rowStyles}'>`;
-				Object.keys(item).map(function(key) {
-                                	output += `<td class='${self.columnStyles}'>${item[key]}</td>`;
-				});
-				output += '</tr>';
+				if (count++ < 20) {
+					output += `<div class='${self.rowStyles}'>`;
+					Object.keys(item).map(function(key) {
+						output += `<div class='${self.columnStyles}'>${item[key]}</div>`;
+					});
+					output += '</div>';
+				}
                         });
-			console.log(output);
                         return output;
 		}
 	}
