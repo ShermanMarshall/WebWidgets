@@ -2,7 +2,7 @@ define(function(require) {
 	var Backbone = require('backbone');
 	var bootstrap = require('bootstrap');
 
-	var accordion = require('accordionPanel');
+	var accordion = require('backbone-accordionPanel');
 
 	var Group = accordion.model;
 	var AccordionCollection = accordion.collection;

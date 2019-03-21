@@ -14,7 +14,6 @@ requirejs.config({
         text : '../libs/text',
         chosen: '../libs/chosen',
 	bootstrap: '../libs/bootstrap/js/bootstrap'
-	//accordionPanel: 
     },
     shim : {
         'jqueryui' : { deps: ['jquery'], exports: 'jqueryui' },
@@ -22,8 +21,9 @@ requirejs.config({
         'jquerylayout': { deps: ['jquery', 'jqueryui', 'jquerymigrate'], exports: 'jquerylayout' },
         'marionette': { deps : ['jquery', 'underscore', 'backbone'], exports: 'marionette' },
         'highcharts': { deps: ['jquery'], exports: 'highcharts'},
-	'bootstrap': { deps: ['jquery'] }
+	'bootstrap': { deps: ['jquery'] },
+	'ips': 'ips'
     }
 });
 
-require(['backbone-main.js']);
+require(['main.js']);
