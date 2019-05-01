@@ -13,6 +13,8 @@ define(function(require) {
 				throw new Error(`${key=='success'?'AJAX':'HTTP'} required element: '${key}' not present`);
 			}
 		}
+
+		var entity = obj.data || '';
 		var isPriorToRequest = true;
 
 		var request = new XMLHttpRequest();
@@ -27,7 +29,7 @@ define(function(require) {
 			}
 		}
 		request.open(method, obj.url, true);
-		request.send();
+		request.send(JSON.stringify(entity));
 	};
 
 	return { //http object
