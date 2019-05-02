@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+<title>Camera Tests </title>
+<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+</head>
+<body>
+
+	<video id="player" controls autoplay hidden></video>
+	<button id="capture">Capture</button>
+	<canvas id="canvas" width=320 height=240></canvas>
+	<script>
+	  const player = document.getElementById('player');
+	  const canvas = document.getElementById('canvas');
+	  const context = canvas.getContext('2d');
+	  const captureButton = document.getElementById('capture');
+
+	  const constraints = {
+	    video: true,
+	  };
+
+	  captureButton.addEventListener('click', () => {
+	    // Draw the video frame to the canvas.
+	    context.drawImage(player, 0, 0, canvas.width, canvas.height);
+
+		var canvasData = canvas.toDataURL();
+/*
+		var blobBin = atob(canvasData.split(',')[1]);
+		var array = [];
+		for(var i = 0; i < blobBin.length; i++) {
+		    array.push(blobBin.charCodeAt(i));
+		}
+		var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+
+
+		var formdata = new FormData();
+		formdata.append("newFileName", file);
+		$.ajax({
+		   url: "/fileUploadURL",
+		   type: "POST",
+		   data: formdata,
+		   processData: false,
+		   contentType: false,
+		}).done(function(response) {
+			console.log(response);
+		  //alert(respond);
+		});
+*/
+	  });
+
+	  // Attach the video stream to the video element and autoplay.
+	  navigator.mediaDevices.getUserMedia(constraints)
+	    .then((stream) => {
+	     	player.srcObject = stream;
+	    });
+	</script>
+</body>
+</html>
