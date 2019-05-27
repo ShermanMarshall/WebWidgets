@@ -14,13 +14,14 @@ define(function(require) {
 			}
 		}
 
-		var entity = obj.data || '';
+		var entityString= obj.data || '';
 		var isPriorToRequest = true;
 
 		var request = new XMLHttpRequest();
+
 		request.onreadystatechange = function() {
 			//Conditions for success
-			if (this.readyState == 4 && this.status == 200) {
+			if (this.readyState == 4) { // && this.status == 200) {
 				obj.success(this.response, this);
 			} else {
 				if (!isPriorToRequest && obj.error) {
@@ -28,8 +29,18 @@ define(function(require) {
 				}
 			}
 		}
+
 		request.open(method, obj.url, true);
-		request.send(JSON.stringify(entity));
+
+		//Set request headers
+		if (obj.headers) {
+			for (var key in obj.headers) {
+				request.setRequestHeader(key, obj.headers[key]);
+			}
+		}
+		
+		//console.log(request);
+		request.send(entityString);
 	};
 
 	return { //http object
