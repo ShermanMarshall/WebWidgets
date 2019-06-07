@@ -7,6 +7,6 @@ define(function(require) {
 	var t = new table.table(json.prefixes);
 
 	var ele = document.querySelector('#table-content');
-	ele.innerHTML = "<div id='' class='container-fluid'>" + t.writeTable() + "</div>";
+	ele.innerHTML = `<div id='' class='container-fluid'>${t.writeTable()}</div>`;
 
 });
