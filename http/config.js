@@ -26,4 +26,4 @@ requirejs.config({
     }
 });
 
-require(['main.js']);
+require(['http-test-main.js']);

@@ -13,9 +13,12 @@ define(function(require) {
 				throw new Error(`${key=='success'?'AJAX':'HTTP'} required element: '${key}' not present`);
 			}
 		}
+
+		var entityString= obj.data || '';
 		var isPriorToRequest = true;
 
 		var request = new XMLHttpRequest();
+
 		request.onreadystatechange = function() {
 			//Conditions for success
 			if (this.readyState == 4 && (this.status >= 200 && this.status <= 299)) {
@@ -30,13 +33,18 @@ define(function(require) {
 				}
 			}
 		}
+
 		request.open(method, obj.url, true);
+
+		//Set request headers
 		if (obj.headers) {
-			for (var header in obj.headers) {
-				request.setRequestHeader(header, obj.headers[header]);
+			for (var key in obj.headers) {
+				request.setRequestHeader(key, obj.headers[key]);
 			}
 		}
-		request.send();
+		
+		//console.log(request);
+		request.send(entityString);
 	};
 
 	return { //http object
