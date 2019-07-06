@@ -22,7 +22,7 @@ define(function(require) {
 		request.onreadystatechange = function() {
 			//Conditions for success
 			if (this.readyState == 4) {
-				if  (this.status >= 200 && this.status <= 299)) {
+				if  (this.status >= 200 && this.status <= 299) {
 					obj.success(this.response, this);
 				} else {
 					console.log(`status code: ${this.status}`);
