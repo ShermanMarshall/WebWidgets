@@ -18,15 +18,24 @@ define(function(require) {
 		var request = new XMLHttpRequest();
 		request.onreadystatechange = function() {
 			//Conditions for success
-			if (this.readyState == 4 && this.status == 200) {
+			if (this.readyState == 4 && (this.status >= 200 && this.status <= 299)) {
 				obj.success(this.response, this);
 			} else {
 				if (!isPriorToRequest && obj.error) {
+					console.log('Request error occurred');
+					obj.error(this);
+				} else {
+					console.log(`status code: ${this.status}`);
 					obj.error(this);
 				}
 			}
 		}
 		request.open(method, obj.url, true);
+		if (obj.headers) {
+			for (var header in obj.headers) {
+				request.setRequestHeader(header, obj.headers[header]);
+			}
+		}
 		request.send();
 	};
 
@@ -48,13 +57,6 @@ define(function(require) {
 		},
 		OPTIONS: function(obj) {
 			makeRequest(obj, 'OPTIONS');
-		},
-		//TRACE: function(obj) {	unsupported by XHR
-		//	makeRequest(obj);
-		//},
-		//CONNECT: function(obj) {
-		//	makeRequest(obj);
-		//},
-		
+		}
 	}
 });
