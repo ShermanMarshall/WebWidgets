@@ -13,11 +13,11 @@ define(function(require) {
 			if (typeof(obj) === typeof([])) {
 				this.tableData = obj; 
 			}
-			if (typeof(obj.tableData) == typeof([])) {
+			if (typeof(obj.tableData) === typeof([])) {
 				this.tableData = obj.tableData;
 			}
 			if (!this.tableData) {
-				return
+				return;
 			}
 
 			var self = this;

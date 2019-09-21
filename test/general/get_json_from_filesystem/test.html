@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv='content-type' content='text/html; charset=utf-8' >
+<title>IFrame Content Display Test</title>
+<style> 
+	div { 
+		display: inline;
+		width: 100%;
+	}
+</style>
+<script src='../../libs/jquery.js'></script>
+</head>
+<body>
+<iframe id='iframe-window' class='col-lg-12' src='red.html' height='1200' width='200' >
+</iframe>
+<div id='schema'>
+
+</div>
+</body>
+<script>
+	var i = 0;
+	var views = ['red.html', 'blue.html', 'green.html'];
+	var changeColors = false;
+	if (changeColors) {
+		setInterval(()=> {
+			let iframeElement = document.querySelector('#iframe-window');
+			iframeElement.setAttribute('src', '/var/folders/_m/2_78yyr11sz9px_0j77zq6q00000gn/T/' + views[i++ % 3]);
+		}, 1000);
+	} else {
+		var json = document.createElement('script');
+		json.setAttribute('src', 'schema.js');
+		var docBody = document.querySelector('body');
+		docBody.appendChild(json);
+
+		console.log(docBody);
+
+		//var obj = window.localStorage.getItem('obj');
+		
+
+		setTimeout(() => { 
+			console.log(window.localStorage.getItem('obj'));
+			console.log(window.hereiam);
+		}, 1000);
+
+
+		
+		//for (var x in obj) {
+		//	console.log(`${x} : ${obj[x]}`);
+		//};
+		/*	$.ajax({
+			url: 'schema.json',
+			type: 'GET',
+			dataType: 'json',
+			success: (data) => {
+				//console.log(data);
+				var schemaElement = document.querySelector('#schema');
+				for (var key in data) {
+					var element = createElement('p');
+					element.innerHTML(`${key} = ${data[key]}`);
+					schemaElement.appendChild(element);
+				}
+			}, 
+			error: (data) => {
+				alert('err');
+				
+			}
+		}); */
+	}
+</script>
+</html>

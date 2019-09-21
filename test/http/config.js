@@ -13,7 +13,8 @@ requirejs.config({
         highcharts: '../libs/highcharts',
         text : '../libs/text',
         chosen: '../libs/chosen',
-	bootstrap: '../libs/bootstrap/js/bootstrap'
+	bootstrap: '../libs/bootstrap/js/bootstrap',
+	http: '../libs/http'
     },
     shim : {
         'jqueryui' : { deps: ['jquery'], exports: 'jqueryui' },
@@ -26,6 +27,4 @@ requirejs.config({
     }
 });
 
-//require(['http-test-main.js']);
-require(['main.js']);
-//file-upload-test.js']);
+require(['http-test-main.js']);

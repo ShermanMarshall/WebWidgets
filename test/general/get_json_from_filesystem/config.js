@@ -26,6 +26,4 @@ requirejs.config({
     }
 });
 
-//require(['http-test-main.js']);
 require(['main.js']);
-//file-upload-test.js']);

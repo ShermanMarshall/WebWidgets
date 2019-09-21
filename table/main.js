@@ -1,12 +1,14 @@
 define(function(require) {
 
-	var $ = require('jquery');
-	var json = require('ips');
+	var json = require('passwords');
 	var table = require('table');
 
-	var t = new table.table(json.prefixes);
+	var t = new table.table(json);
 
 	var ele = document.querySelector('#table-content');
-	ele.innerHTML = `<div id='' class='container-fluid'>${t.writeTable()}</div>`;
+	var stuff = t.writeTable();
+	
+	console.log(stuff);
+	ele.innerHTML = `<div id='' class='container-fluid'>${stuff}</div>`;
 
 });

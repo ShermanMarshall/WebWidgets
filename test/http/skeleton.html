@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<title> Testing </title>
+<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+<script src='../libs/require.js' data-main='config.js'></script>
+</head>
+<body>
+	<div id='box'>
+		<form method='POST' enctype='multipart/form-data' id='named' action='https://wp5pd6pw89.execute-api.us-west-1.amazonaws.com/default' >
+			<input type='file' name='echo' id='getFile' />
+			<!-- input type='file' name='other' id='getFile2' / -->
+			<input type='submit' name='submit' />
+		</form>
+		<script type='text/javascript' >
+			function readData(event) {
+				var files = event.target.files;			
+					var attr = $('#getFile').attr('name');
+					attr = attr.substr(0, attr.length);
+					alert(attr);
+				if (files && (window.File && window.FileReader && window.FileList && window.Blob)) {
+					for (var i=0, f; f=files[i]; i++) {
+						var r = new FileReader();
+						r.onload = (function(f) {
+							return function(e) {
+								var contents = e.target.result;
+								alert('Data retreived:\n' + 'name: ' + f.name + '\n' +
+									'type: ' + f.type + '\n' +
+									'size: ' + f.size + ' bytes\n' +
+									'data:\n ' + contents);
+							};
+						}) (f);
+						r.readAsText(f);
+					}
+				} else {
+					alert('Failed to load file');
+				}
+			}
+			//document.getElementById('getFile').addEventListener('change', readData, false);
+		</script>
+		</div>
+		<div id='other'>		
+		</div>
+		
+		<button id='upload'> Upload </button>
+		<script type='text/javascript' >
+			/*
+			document.getElementById('upload').onclick(function() {
+				var files = new FormData(document.forms[0]);
+				files.append("upload", document.getElementById('getFile').files[0]);
+				$.ajax({
+					url : '',//https://r95iab8v8d.execute-api.us-west-1.amazonaws.com/default/BWProducerData'
+						//'/GeoDatasetGenerator/gis/uploadTest',
+					method : 'POST',
+					data : files,
+					contentType: false,
+					processData: false,
+					success : function (response) { 
+						console.log(response);
+						alert('response'); 
+					},
+					error : function() { alert('error'); }
+				});
+			});
+			*/
+		</script>
+</body>
+</html>
