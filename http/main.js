@@ -1,21 +1,25 @@
 define(function(require) {
 
-	var $ = require('jquery');
 	var HTTP = require('http');
-
-	//var files = new FormData(document.forms[0]);
-        //files.append("upload", document.getElementById('getFile').files[0]);
-
+	var dataStr = JSON.stringify({ 
+		//'session_key': 'dJySYbOFFHTnDKOmy0+v5WTfsrZ4pH482S8LoLDc9f0=',
+		//'6S/56HFf3ZTu21SlML81JdE2YGvOb6+/U4og+1gumks=' });
+		isConsoleTest:true,
+		'aws-console-test':'snl-55999'
+	});
 	HTTP.GET({
-		url: 'https://lephhw4skc.execute-api.us-west-1.amazonaws.com/test/t',
-			//'https://lephhw4skc.execute-api.us-west-1.amazonaws.com/test/t',
-			//'https://vgwu7v6r7l.execute-api.us-west-1.amazonaws.com/default/OptionsTest', 
-			//'https://raxdv5w0v1.execute-api.us-west-1.amazonaws.com/services',
-		data: '', //files,
-		success: (data) => {
+		url: 	'https://6m12icqwhb.execute-api.us-west-1.amazonaws.com/content/extra/path/params?query=string&param=another',
+			//'https://7nehasvz0a.execute-api.us-west-1.amazonaws.com/default/edit',
+			//'https://rqhrldn92h.execute-api.us-west-1.amazonaws.com/services/login',
+		data: dataStr,
+		headers: { testing: 'foobarbaz'},
+		success: (data)=> {
 			console.log(data);
-		}, error: (xhr)=> {
+		},
+		error: (xhr)=> {
 			console.log(xhr);
+			alert('err');
 		}
 	});
+
 });

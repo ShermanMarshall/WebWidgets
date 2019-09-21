@@ -21,12 +21,18 @@ define(function(require) {
 
 		request.onreadystatechange = function() {
 			//Conditions for success
-			if (this.readyState == 4) { // && this.status == 200) {
-				obj.success(this.response, this);
+			if (this.readyState == 4) {
+				if  (this.status >= 200 && this.status <= 299) {
+					obj.success(this.response, this);
+				} else {
+					console.log(`status code: ${this.status}`);
+					obj.error(this);
+				} 
 			} else {
 				if (!isPriorToRequest && obj.error) {
+					console.log('Request error occurred');
 					obj.error(this);
-				}
+				} 
 			}
 		}
 
@@ -61,13 +67,6 @@ define(function(require) {
 		},
 		OPTIONS: function(obj) {
 			makeRequest(obj, 'OPTIONS');
-		},
-		//TRACE: function(obj) {	unsupported by XHR
-		//	makeRequest(obj);
-		//},
-		//CONNECT: function(obj) {
-		//	makeRequest(obj);
-		//},
-		
+		}
 	}
 });
