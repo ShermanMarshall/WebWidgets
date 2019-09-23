@@ -16,6 +16,7 @@
 	<raw-html-test v-for='item in interpolationSet'
 			v-bind:key='item.id'
 			v-bind:msg='item.msg'
+			v-bind:url='item.url'
 	></raw-html-test>
     </div>
 
@@ -24,11 +25,13 @@
                 props: ['title'],
                 template: "<h3>{{ title }}</h3>"
         });
+
 	Vue.component('raw-html-test', {
-		props: ['msg'],
+		props: ['url', 'msg'],
 		template: `<div id='a-root'>
 			<p> Vue requires the v-html tag to output interpreted HTML: {{ msg }}</p>
-			<p>Otherwise, content won\'t look like this! <span v-html="msg"></span></p> 
+			<p>Otherwise, content won&quot;t look like this! <span v-html="msg"></span></p>
+			<img v-bind:src='url' alt='content' >
 			</div>`
 	});
 
@@ -38,11 +41,10 @@
                 testSet: [{ id: 1, title: 'Hello Vue!'},
 			{ id: 2, title: 'Other msg'},
 			{ id: 3, title: 'duplicate'}],
-		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>' },
-				{id: 5, msg: '<span style="color: red;">Red incoming</span>' }]
+		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>', url:'./mirror.jpg' },
+				{id: 5, msg: '<span style="color: red;">Red incoming</span>', url:'./whiskeyinajar.jpg' }]
             }
         });
-
     </script>
 
 </body>
