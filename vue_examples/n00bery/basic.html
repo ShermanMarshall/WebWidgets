@@ -9,6 +9,9 @@
 </head>
 <body>
     <div id="app">
+	<select>
+		<option v-for='item in testSet'>{{ item.id - 1 }} : {{ item.title }}</option>
+	</select>
         <app-test v-for='item in testSet'
                   v-bind:key='item.id'
                   v-bind:title='item.title'
@@ -16,30 +19,33 @@
 	<raw-html-test v-for='item in interpolationSet'
 			v-bind:key='item.id'
 			v-bind:msg='item.msg'
+			v-bind:url='item.url'
 	></raw-html-test>
     </div>
 
     <script>
         Vue.component('app-test', {
-                props: ['title'],
-                template: "<h3>{{ title }}</h3>"
+                props: ['title', 'url'],
+                template: `<div><h3>{{ title }}</h3>
+			</div>`
         });
 	Vue.component('raw-html-test', {
-		props: ['msg'],
+		props: ['msg', 'url'], //, 'url'],
 		template: `<div id='a-root'>
 			<p> Vue requires the v-html tag to output interpreted HTML: {{ msg }}</p>
 			<p>Otherwise, content won\'t look like this! <span v-html="msg"></span></p> 
-			</div>`
+			<img v-bind:src='url' v-bind:alt='title' /></div>`
 	});
 
         var app = new Vue({
             el: '#app',
             data: {
-                testSet: [{ id: 1, title: 'Hello Vue!'},
-			{ id: 2, title: 'Other msg'},
-			{ id: 3, title: 'duplicate'}],
-		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>' },
-				{id: 5, msg: '<span style="color: red;">Red incoming</span>' }]
+                testSet: [{ id: 1, title: 'Hello Vue!', url: 'living-room.jpg'},
+			{ id: 2, title: 'Other msg', url: 'kitchen.jpg' },
+			{ id: 3, title: 'duplicate', url: 'kitchen.jpg' }],
+
+		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>', url: 'kitchen.jpg' },
+				{id: 5, msg: '<span style="color: red;">Red incoming</span>', url: 'living-room.jpg' }],
             }
         });
 
