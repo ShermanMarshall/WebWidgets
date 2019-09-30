@@ -9,10 +9,8 @@ define(function(require) {
 	});
 	HTTP.GET({
 		url: 	'https://6m12icqwhb.execute-api.us-west-1.amazonaws.com/content/extra/path/params?query=string&param=another',
-			//'https://7nehasvz0a.execute-api.us-west-1.amazonaws.com/default/edit',
-			//'https://rqhrldn92h.execute-api.us-west-1.amazonaws.com/services/login',
 		data: dataStr,
-		headers: { testing: 'foobarbaz'},
+		headers: {'is-console-test':'true', 'aws-console-test': 'snl-55999'},
 		success: (data)=> {
 			console.log(data);
 		},

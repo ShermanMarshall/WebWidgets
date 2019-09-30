@@ -29,26 +29,26 @@
                 template: `<div><h3>{{ title }}</h3>
 			</div>`
         });
+
 	Vue.component('raw-html-test', {
-		props: ['msg', 'url'], //, 'url'],
+		props: ['url', 'msg'],
 		template: `<div id='a-root'>
 			<p> Vue requires the v-html tag to output interpreted HTML: {{ msg }}</p>
-			<p>Otherwise, content won\'t look like this! <span v-html="msg"></span></p> 
-			<img v-bind:src='url' v-bind:alt='title' /></div>`
+			<p>Otherwise, content won&quot;t look like this! <span v-html="msg"></span></p>
+			<img v-bind:src='url' alt='content' >
+			</div>`
 	});
 
         var app = new Vue({
             el: '#app',
             data: {
-                testSet: [{ id: 1, title: 'Hello Vue!', url: 'living-room.jpg'},
-			{ id: 2, title: 'Other msg', url: 'kitchen.jpg' },
-			{ id: 3, title: 'duplicate', url: 'kitchen.jpg' }],
-
-		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>', url: 'kitchen.jpg' },
-				{id: 5, msg: '<span style="color: red;">Red incoming</span>', url: 'living-room.jpg' }],
+                testSet: [{ id: 1, title: 'Hello Vue!'},
+			{ id: 2, title: 'Other msg'},
+			{ id: 3, title: 'duplicate'}],
+		interpolationSet: [{ id: 4, msg: '<span style="color: green;">Woot. It is green!</span>', url:'./mirror.jpg' },
+				{id: 5, msg: '<span style="color: red;">Red incoming</span>', url:'./whiskeyinajar.jpg' }]
             }
         });
-
     </script>
 
 </body>
